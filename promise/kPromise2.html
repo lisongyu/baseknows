@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>我是手写的promise2</h2>
+  <script src="./js/kpromise.js"></script>
+  <script>
+    // let p1=new KPromise((resolve,reject)=>{
+    //   console.log('KPromise');
+    //   //resolve('开课吧')
+    //   reject('出错了')
+    // }).then(val=>{
+    //   console.log('val',val)
+    // },err=>{
+    //   console.log('err',err);
+    // })
+
+
+    // let p1=new KPromise((resolve,reject)=>{
+    //   console.log('KPromise');
+    //   reject('出错了')
+    // }).then(val=>{
+    //   console.log('val',val)
+    // }).catch(err=>{
+    //   console.log('err',err)
+    // })
+
+    // KPromise.resolve('开课吧').then(val => {
+    //   console.log('val', val)
+    // })
+
+    // KPromise.reject('出错考虑').then(undefined, val => {
+    //   console.log('err', val)
+    // })
+    // KPromise.all([
+    //   KPromise.resolve(123),
+    //   KPromise.resolve('开课吧'),
+    //   KPromise.reject('我错了'),
+
+    //   new Promise((resolve,reject)=>{
+    //     setTimeout(_=>{
+    //       resolve('zMouse')
+    //     },1000)
+    //   })
+    // ]).then(vals =>{
+    //   console.log(vals);
+    // }).catch(err=>{
+    //   console.log(err)
+    // })
+
+    KPromise.race([
+      KPromise.resolve(123),
+      KPromise.resolve('开课吧'),
+      KPromise.reject('我错了'),
+
+      new Promise((resolve,reject)=>{
+        setTimeout(_=>{
+          resolve('zMouse')
+        },1000)
+      })
+    ]).then(vals =>{
+      console.log(vals);
+    }).catch(err=>{
+      console.log(err)
+    })
+  </script>
+
+</body>
+
+</html>
