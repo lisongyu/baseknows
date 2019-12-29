@@ -62,27 +62,27 @@ class KPromise {
   }
   //每个promise都会使用promise方法
   then(reslovedHandler, rejectedHandler) {
-    // 事件 
+    
   
     return new KPromise((resolve, reject) => {
+      //解决方法
       function newResolveHandler(val) {
+        //判断是不是fn，有时reject,不需要
         if (typeof reslovedHandler === 'function') {
 
           let result = reslovedHandler(val);
+          //返回值，如果返回的是promise方法
           if (result instanceof KPromise) {
-
+           //继续调用then方法收集
             result.then(resolve, reject);
           } else {
-          
+           //如果不是直接进行处理
             resolve(result);
           }
         } else {
-
+          //当只有reject时,reslove为undefined时
           resolve(val);
         }
-
-
-
       }
 
       function newRejectHandler(val) {
@@ -103,20 +103,20 @@ class KPromise {
 
     })
   }
+
   catch (rejectedHandler) {
     return this.then(undefined, rejectedHandler);
-
   }
 
-  //静态方法
+  //静态方法 相当于调用resolve方法
   static resolve(val) {
     return new KPromise(resolve => {
       resolve(val)
     })
 
   }
+  //相当于调用reject方法
   static reject(val) {
-
     return new KPromise((resolve, reject) => {
       reject(val)
     })
@@ -128,6 +128,7 @@ class KPromise {
     let i = 0;
     let vals = [];
     return new KPromise((resolve, reject) => {
+      //迭代器方法使用
       iterator.forEach(it => {
         it.then(val => {
           i++;

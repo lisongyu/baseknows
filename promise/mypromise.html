@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>实现自己的promise</title>
+</head>
+
+<body>
+
+  <h3>自己完成的promise</h3>
+  <script src="./js/mypromise.js"></script>
+  <script>
+    //传入一个函数
+    let p1 = new MyPromise((resolve, reject) => {
+      //先执行resolve
+      // resolve('我是手写的方法')
+      // reject('我输入错了')
+    })
+
+    // let p2 = p1.then(res => {
+    //   console.log('res', res)
+    //   return new MyPromise((resolve, reject) => {
+
+    //     // resolve('kaikeba')
+    //     reject('出错了')
+    //   })
+    // });
+
+    // p1.catch(err => {
+    //   console.log('err', err)
+    // })
+
+    // p2.then(res => {
+    //   console.log('res1', res)
+    // })
+
+    //   MyPromise.resolve('我可以的').then(val => {
+    //   console.log('val', val)
+    // })
+    //  MyPromise.reject('出错考虑').then(undefined, val => {
+    //   console.log('err', val)
+    // })
+
+    //   MyPromise.all([
+    //   MyPromise.resolve(123),
+    //   MyPromise.resolve('开课吧'),
+    
+
+    //   new Promise((resolve,reject)=>{
+    //     setTimeout(_=>{
+    //       resolve('zMouse')
+    //     },1000)
+    //   })
+    // ]).then(vals =>{
+    //   console.log(vals);
+    // }).catch(err=>{
+    //   console.log(err)
+    // })
+
+    
+    MyPromise.race([
+      MyPromise.resolve(123),
+      MyPromise.resolve('开课吧'),
+      MyPromise.reject('我错了'),
+
+      new MyPromise((resolve,reject)=>{
+        setTimeout(_=>{
+          resolve('zMouse')
+        },1000)
+      })
+    ]).then(vals =>{
+      console.log(vals);
+    }).catch(err=>{
+      console.log(err)
+    })
+  </script>
+
+</body>
+
+</html>
