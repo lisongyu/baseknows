@@ -10,15 +10,30 @@
 
 <body>
 
-  <h3>自己完成的promise</h3>
+  <h3>自己完成的promise第二次书写</h3>
   <script src="./js/mypromise.js"></script>
   <script>
     //传入一个函数
-    let p1 = new MyPromise((resolve, reject) => {
-      //先执行resolve
-      // resolve('我是手写的方法')
-      // reject('我输入错了')
-    })
+    // let p1 = new MyPromise((resolve, reject) => {
+    //先执行resolve
+    //  resolve('我是手写的方法')
+    //    reject('我输入错了')
+    // })
+
+    // p1.then(res => {
+    //   console.log('res', res)
+    //   // return 123
+    //   //返回promise
+    //        return new MyPromise((resolve, reject) => {
+
+    //     resolve('我认真了')
+    //     // reject('出错了')
+    //   })
+
+
+    // }).then(res2 => {
+    //   console.log('res2', res2)
+    // })
 
     // let p2 = p1.then(res => {
     //   console.log('res', res)
@@ -43,37 +58,42 @@
     //  MyPromise.reject('出错考虑').then(undefined, val => {
     //   console.log('err', val)
     // })
+    //reject方法实现
+    // MyPromise.reject('出错考虑').catch(err => {
+    //   console.log('err1', err)
+    // })
 
-    //   MyPromise.all([
-    //   MyPromise.resolve(123),
-    //   MyPromise.resolve('开课吧'),
-    
+    // MyPromise.all(
+    //   [
+    //     MyPromise.resolve(123),
+    //     MyPromise.resolve('开课吧'),
+    //     MyPromise.reject('我错了'),
 
-    //   new Promise((resolve,reject)=>{
-    //     setTimeout(_=>{
-    //       resolve('zMouse')
-    //     },1000)
-    //   })
-    // ]).then(vals =>{
+    //     new Promise((resolve, reject) => {
+    //       setTimeout(_ => {
+    //         resolve('zMouse')
+    //       }, 1000)
+    //     })
+    //   ]).then(vals => {
     //   console.log(vals);
-    // }).catch(err=>{
+    // }).catch(err => {
     //   console.log(err)
     // })
 
-    
+    //验证race
     MyPromise.race([
       MyPromise.resolve(123),
       MyPromise.resolve('开课吧'),
       MyPromise.reject('我错了'),
 
-      new MyPromise((resolve,reject)=>{
-        setTimeout(_=>{
+      new MyPromise((resolve, reject) => {
+        setTimeout(_ => {
           resolve('zMouse')
-        },1000)
+        }, 1000)
       })
-    ]).then(vals =>{
+    ]).then(vals => {
       console.log(vals);
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err)
     })
   </script>
